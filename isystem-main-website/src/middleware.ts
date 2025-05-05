@@ -1,68 +1,70 @@
 import { NextRequest, NextResponse } from 'next/server';
-import Negotiator from 'negotiator';
 import { match as matchLocale } from '@formatjs/intl-localematcher';
+import Negotiator from 'negotiator';
 import { i18n } from './lib/i18n-config';
 
-// Get the user locale preferences
-function getLocale(request: NextRequest) {
-  // Retrieve the locale from cookie first (for persisting user's choice)
-  const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
-  if (cookieLocale && i18n.locales.includes(cookieLocale)) {
-    return cookieLocale;
-  }
+function getLocale(request: NextRequest): string {
+  // Negotiator expects plain object so we need to transform headers
+  const negotiatorHeaders: Record<string, string> = {};
+  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
-  // If no cookie, detect from headers
-  const headers = new Headers(request.headers);
-  const acceptLanguage = headers.get('accept-language') || '';
-  headers.set('accept-language', acceptLanguage);
-
-  const negotiator = new Negotiator({ headers: Object.fromEntries(headers.entries()) });
+  // Use negotiator and intl-localematcher to get best locale
+  let languages = new Negotiator({ headers: negotiatorHeaders }).languages();
   
-  try {
-    const languages = negotiator.languages();
-    return matchLocale(languages, i18n.locales, i18n.defaultLocale);
-  } catch (error) {
-    console.error('Error matching locale:', error);
-    return i18n.defaultLocale;
+  // Check if there's already a locale cookie
+  const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
+  if (cookieLocale && i18n.locales.includes(cookieLocale as any)) {
+    languages = [cookieLocale, ...languages];
   }
+  
+  return matchLocale(languages, i18n.locales, i18n.defaultLocale);
 }
 
 export function middleware(request: NextRequest) {
   // Get the pathname of the request
   const pathname = request.nextUrl.pathname;
-
-  // Check if the pathname is missing a locale
-  const pathnameIsMissingLocale = i18n.locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-  );
-
-  // Special case for legal pages that bypass language routing
-  if (pathname.startsWith('/legal/')) {
+  
+  // Skip if it's an API call, static asset, or custom Next.js resource
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.includes('/public/') ||
+    pathname.endsWith('.xml') ||
+    pathname.endsWith('.txt') ||
+    pathname.endsWith('.ico')
+  ) {
     return NextResponse.next();
   }
-
-  // If it needs a locale, redirect
-  if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
-
-    // For the root path, redirect to the locale 
-    if (pathname === '/') {
-      return NextResponse.redirect(new URL(`/${locale}`, request.url));
-    }
-
-    // Otherwise, prepend the locale to the path
-    return NextResponse.redirect(
-      new URL(`/${locale}${pathname.startsWith('/') ? pathname : `/${pathname}`}`, request.url)
-    );
+  
+  // Skip if it's a legal page that should bypass language routing
+  if (pathname.startsWith('/privacy') || pathname.startsWith('/terms')) {
+    return NextResponse.next();
   }
-
-  return NextResponse.next();
+  
+  // Check if the pathname already includes a locale
+  const pathnameHasLocale = i18n.locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
+  
+  if (pathnameHasLocale) return NextResponse.next();
+  
+  // Get the preferred locale
+  const locale = getLocale(request);
+  
+  // Create a new URL with the locale prefix
+  const newUrl = new URL(
+    `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`,
+    request.url
+  );
+  
+  // If search params exist, add them to the new URL
+  if (request.nextUrl.search) {
+    newUrl.search = request.nextUrl.search;
+  }
+  
+  return NextResponse.redirect(newUrl);
 }
 
 export const config = {
-  // Match all paths except for:
-  // - API routes
-  // - Static files (e.g. images, icons)
-  // - favicon.ico
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|public|favicon.ico).*)'],
 };
