@@ -1,0 +1,25 @@
+{
+  "name": "isystem-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "isystem-main-website",
+    "isystem-academy"
+  ],
+  "scripts": {
+    "dev:main": "cd isystem-main-website && npm run dev",
+    "dev:academy": "cd isystem-academy && npm run dev",
+    "build:main": "cd isystem-main-website && npm run build",
+    "build:academy": "cd isystem-academy && npm run build",
+    "start:main": "cd isystem-main-website && npm run start",
+    "start:academy": "cd isystem-academy && npm run start",
+    "lint:main": "cd isystem-main-website && npm run lint",
+    "lint:academy": "cd isystem-academy && npm run lint",
+    "dev": "concurrently \"npm run dev:main\" \"npm run dev:academy\"",
+    "build": "npm run build:main && npm run build:academy",
+    "lint": "npm run lint:main && npm run lint:academy"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
