@@ -1,17 +1,21 @@
-import { clsx, type ClassValue } from 'clsx';
+import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 /**
- * Combines multiple class names using clsx and tailwind-merge for efficient class management
+ * Combines class names with Tailwind CSS specific merging
  */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
 /**
- * Formats a price value with the given currency
+ * Format price with currency
  */
-export function formatPrice(price: number, currency: string = 'EUR', locale: string = 'nl-NL') {
+export function formatPrice(
+  price: number,
+  currency: string = 'EUR',
+  locale: string = 'nl-NL'
+) {
   return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency,
@@ -19,31 +23,113 @@ export function formatPrice(price: number, currency: string = 'EUR', locale: str
 }
 
 /**
- * Creates a debounced function that will only execute after a certain delay
+ * Get course status label based on status code
  */
-export function debounce<T extends (...args: any[]) => any>(
-  fn: T,
-  delay: number
-): (...args: Parameters<T>) => void {
-  let timeoutId: NodeJS.Timeout;
-  
-  return function (...args: Parameters<T>) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn(...args), delay);
+export function getCourseStatusLabel(
+  status: 'enrollment-open' | 'coming-soon' | 'full' | 'in-progress',
+  locale: string = 'nl'
+): string {
+  const statusLabels = {
+    'enrollment-open': {
+      nl: 'Inschrijving open',
+      en: 'Enrollment open',
+      ar: 'التسجيل مفتوح',
+      uk: 'Відкрита реєстрація',
+    },
+    'coming-soon': {
+      nl: 'Binnenkort beschikbaar',
+      en: 'Coming soon',
+      ar: 'قريبًا',
+      uk: 'Незабаром',
+    },
+    'full': {
+      nl: 'Volgeboekt',
+      en: 'Full',
+      ar: 'مكتمل',
+      uk: 'Заповнено',
+    },
+    'in-progress': {
+      nl: 'Cursus loopt',
+      en: 'In progress',
+      ar: 'قيد التقدم',
+      uk: 'У процесі',
+    },
   };
+
+  return statusLabels[status][locale as keyof typeof statusLabels[typeof status]] || 
+         statusLabels[status].en;
 }
 
 /**
- * Academy-specific utility functions
+ * Truncate text to a specific length with ellipsis
  */
+export function truncateText(text: string, maxLength: number = 100): string {
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength) + '...';
+}
 
 /**
- * Gets the registration status of a course
+ * Generate readable date in the correct locale format
  */
-export function getCourseStatus(startDate: Date, endDate: Date): 'upcoming' | 'active' | 'ended' {
-  const now = new Date();
-  
-  if (now < startDate) return 'upcoming';
-  if (now > endDate) return 'ended';
-  return 'active';
+export function formatDate(
+  date: Date | string,
+  locale: string = 'nl-NL',
+  options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' }
+): string {
+  const dateToFormat = typeof date === 'string' ? new Date(date) : date;
+  return new Intl.DateTimeFormat(locale, options).format(dateToFormat);
+}
+
+/**
+ * Convert locale code to full language name
+ */
+export function localeToLanguageName(locale: string): string {
+  const languageNames: Record<string, string> = {
+    nl: 'Nederlands',
+    en: 'English',
+    ar: 'العربية',
+    uk: 'Українська',
+  };
+
+  return languageNames[locale] || locale;
+}
+
+/**
+ * Check if email is valid
+ */
+export function isValidEmail(email: string): boolean {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+/**
+ * Get course difficulty level label
+ */
+export function getCourseLevelLabel(
+  level: 'beginner' | 'intermediate' | 'advanced',
+  locale: string = 'nl'
+): string {
+  const levelLabels = {
+    beginner: {
+      nl: 'Beginners',
+      en: 'Beginner',
+      ar: 'مبتدئ',
+      uk: 'Початковий',
+    },
+    intermediate: {
+      nl: 'Gemiddeld',
+      en: 'Intermediate',
+      ar: 'متوسط',
+      uk: 'Середній',
+    },
+    advanced: {
+      nl: 'Gevorderd',
+      en: 'Advanced',
+      ar: 'متقدم',
+      uk: 'Просунутий',
+    },
+  };
+
+  return levelLabels[level][locale as keyof typeof levelLabels[typeof level]] || 
+         levelLabels[level].en;
 }
