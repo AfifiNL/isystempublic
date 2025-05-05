@@ -1,166 +1,205 @@
 import React from 'react';
 import { Metadata } from 'next';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
+import { CourseCard } from '@/components/courses/CourseCard';
 
 export const metadata: Metadata = {
   title: 'Courses | iSystem Academy',
   description: 'Explore our courses for newcomers in the Netherlands',
 };
 
-type CourseProps = {
-  title: string;
-  description: string;
-  level: string;
-  duration: string;
-  image: string;
-  slug: string;
-};
-
-// Course component
-const CourseCard = ({ course, lang }: { course: CourseProps; lang: string }) => {
-  const { title, description, level, duration, image, slug } = course;
-
-  const levelText = {
-    nl: 'Niveau',
-    en: 'Level',
-    ar: 'المستوى',
-    uk: 'Рівень',
-  };
-
-  const durationText = {
-    nl: 'Duur',
-    en: 'Duration',
-    ar: 'المدة',
-    uk: 'Тривалість',
-  };
-
-  const enrollText = {
-    nl: 'Inschrijven',
-    en: 'Enroll Now',
-    ar: 'سجل الآن',
-    uk: 'Зареєструватися',
-  };
-
-  return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 transition-all duration-300 hover:shadow-xl course-card">
-      <div className="relative h-48 w-full">
-        <Image src={image} alt={title} fill className="object-cover" />
-      </div>
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-2">{title}</h3>
-        <p className="text-gray-600 text-sm mb-4">{description}</p>
-        <div className="flex justify-between mb-4 text-sm">
-          <div>
-            <span className="font-medium">{levelText[lang as keyof typeof levelText]}: </span>
-            {level}
-          </div>
-          <div>
-            <span className="font-medium">{durationText[lang as keyof typeof durationText]}: </span>
-            {duration}
-          </div>
-        </div>
-        <Button asChild className="w-full">
-          <Link href={\`/\${lang}/enrollment?course=\${slug}\`}>
-            {enrollText[lang as keyof typeof enrollText]}
-          </Link>
-        </Button>
-      </div>
-    </div>
-  );
-};
-
-export default function CoursesPage({ params }: { params: { lang: string } }) {
-  const { lang } = params;
-
-  const courseData = [
-    {
-      title: lang === 'nl' ? 'Nederlandse Basiscursus' : 
-             lang === 'en' ? 'Dutch Basics' : 
-             lang === 'ar' ? 'أساسيات اللغة الهولندية' : 
-                           'Основи голландської мови',
-      description: lang === 'nl' ? 'Leer de basisprincipes van de Nederlandse taal voor dagelijks gebruik.' : 
-                   lang === 'en' ? 'Learn the fundamentals of the Dutch language for everyday use.' : 
-                   lang === 'ar' ? 'تعلم أساسيات اللغة الهولندية للاستخدام اليومي.' : 
-                                'Вивчіть основи голландської мови для повсякденного використання.',
-      level: lang === 'nl' ? 'Beginner' : 
-             lang === 'en' ? 'Beginner' : 
-             lang === 'ar' ? 'مبتدئ' : 
-                           'Початковий',
-      duration: lang === 'nl' ? '8 weken' : 
-                lang === 'en' ? '8 weeks' : 
-                lang === 'ar' ? '٨ أسابيع' : 
-                              '8 тижнів',
-      image: '/course-dutch.jpg',
-      slug: 'dutch-basics'
+// Mock course data - in a real application, this would come from an API or CMS
+const courseData = [
+  {
+    id: 'dutch-basics',
+    status: 'enrollment-open',
+    imageUrl: '/images/course-dutch-basics.jpg',
+    duration: '8 weeks',
+    level: 'beginner',
+    titles: {
+      nl: 'Nederlandse Basiscursus',
+      en: 'Dutch Basics',
+      ar: 'أساسيات اللغة الهولندية',
+      uk: 'Основи голландської мови',
     },
-    {
-      title: lang === 'nl' ? 'Nederlandse Cultuur' : 
-             lang === 'en' ? 'Dutch Culture' : 
-             lang === 'ar' ? 'الثقافة الهولندية' : 
-                           'Голландська культура',
-      description: lang === 'nl' ? 'Ontdek de Nederlandse cultuur, tradities en sociale normen.' : 
-                   lang === 'en' ? 'Discover Dutch culture, traditions, and social norms.' : 
-                   lang === 'ar' ? 'اكتشف الثقافة الهولندية والتقاليد والمعايير الاجتماعية.' : 
-                                'Відкрийте для себе голландську культуру, традиції та соціальні норми.',
-      level: lang === 'nl' ? 'Beginner' : 
-             lang === 'en' ? 'Beginner' : 
-             lang === 'ar' ? 'مبتدئ' : 
-                           'Початковий',
-      duration: lang === 'nl' ? '4 weken' : 
-                lang === 'en' ? '4 weeks' : 
-                lang === 'ar' ? '٤ أسابيع' : 
-                              '4 тижнів',
-      image: '/course-culture.jpg',
-      slug: 'dutch-culture'
-    },
-    {
-      title: lang === 'nl' ? 'Professionele Integratie' : 
-             lang === 'en' ? 'Professional Integration' : 
-             lang === 'ar' ? 'الاندماج المهني' : 
-                           'Професійна інтеграція',
-      description: lang === 'nl' ? 'Leer de Nederlandse arbeidsmarkt kennen en ontwikkel waardevolle professionele vaardigheden.' : 
-                   lang === 'en' ? 'Learn about the Dutch job market and develop valuable professional skills.' : 
-                   lang === 'ar' ? 'تعرف على سوق العمل الهولندي وطور المهارات المهنية القيمة.' : 
-                                'Дізнайтеся про голландський ринок праці та розвивайте цінні професійні навички.',
-      level: lang === 'nl' ? 'Gemiddeld' : 
-             lang === 'en' ? 'Intermediate' : 
-             lang === 'ar' ? 'متوسط' : 
-                           'Середній',
-      duration: lang === 'nl' ? '6 weken' : 
-                lang === 'en' ? '6 weeks' : 
-                lang === 'ar' ? '٦ أسابيع' : 
-                              '6 тижнів',
-      image: '/course-professional.jpg',
-      slug: 'professional-integration'
+    descriptions: {
+      nl: 'Leer de basis van de Nederlandse taal. Deze cursus is ontworpen voor nieuwkomers die willen beginnen met het leren van Nederlands.',
+      en: 'Learn the basics of the Dutch language. This course is designed for newcomers who want to start learning Dutch.',
+      ar: 'تعلم أساسيات اللغة الهولندية. تم تصميم هذه الدورة للوافدين الجدد الذين يرغبون في بدء تعلم اللغة الهولندية.',
+      uk: 'Вивчіть основи голландської мови. Цей курс розроблений для новачків, які хочуть почати вивчати голландську мову.',
     }
-  ];
+  },
+  {
+    id: 'dutch-culture',
+    status: 'enrollment-open',
+    imageUrl: '/images/course-dutch-culture.jpg',
+    duration: '6 weeks',
+    level: 'beginner',
+    titles: {
+      nl: 'Nederlandse Cultuur',
+      en: 'Dutch Culture',
+      ar: 'الثقافة الهولندية',
+      uk: 'Голландська культура',
+    },
+    descriptions: {
+      nl: 'Ontdek de Nederlandse cultuur, tradities en gewoonten. Leer hoe Nederlanders leven, werken en ontspannen.',
+      en: 'Discover Dutch culture, traditions, and customs. Learn how the Dutch live, work, and relax.',
+      ar: 'اكتشف الثقافة والتقاليد والعادات الهولندية. تعرف على كيفية عيش وعمل واسترخاء الهولنديين.',
+      uk: 'Відкрийте для себе голландську культуру, традиції та звичаї. Дізнайтеся, як голландці живуть, працюють і відпочивають.',
+    }
+  },
+  {
+    id: 'professional-integration',
+    status: 'coming-soon',
+    imageUrl: '/images/course-professional.jpg',
+    duration: '10 weeks',
+    level: 'intermediate',
+    titles: {
+      nl: 'Professionele Integratie',
+      en: 'Professional Integration',
+      ar: 'الاندماج المهني',
+      uk: 'Професійна інтеграція',
+    },
+    descriptions: {
+      nl: 'Bereid je voor op werken in Nederland. Leer over de Nederlandse werkcultuur, sollicitatieprocedures en professionele communicatie.',
+      en: 'Prepare for working in the Netherlands. Learn about Dutch work culture, job application procedures, and professional communication.',
+      ar: 'استعد للعمل في هولندا. تعرف على ثقافة العمل الهولندية وإجراءات التقدم للوظائف والتواصل المهني.',
+      uk: 'Підготуйтеся до роботи в Нідерландах. Дізнайтеся про голландську робочу культуру, процедури подання заявок на роботу та професійне спілкування.',
+    }
+  },
+  {
+    id: 'advanced-dutch',
+    status: 'in-progress',
+    imageUrl: '/images/course-advanced-dutch.jpg',
+    duration: '12 weeks',
+    level: 'advanced',
+    titles: {
+      nl: 'Gevorderd Nederlands',
+      en: 'Advanced Dutch',
+      ar: 'اللغة الهولندية المتقدمة',
+      uk: 'Поглиблена голландська мова',
+    },
+    descriptions: {
+      nl: 'Verbeter je Nederlandse taalvaardigheid naar een gevorderd niveau. Deze cursus is geschikt voor mensen die al basiskennis hebben van Nederlands.',
+      en: 'Improve your Dutch language skills to an advanced level. This course is suitable for people who already have basic knowledge of Dutch.',
+      ar: 'حسّن مهارات اللغة الهولندية لديك إلى مستوى متقدم. هذه الدورة مناسبة للأشخاص الذين لديهم بالفعل معرفة أساسية باللغة الهولندية.',
+      uk: 'Покращіть свої навички голландської мови до просунутого рівня. Цей курс підходить для людей, які вже мають базові знання голландської мови.',
+    }
+  }
+];
 
-  const title = 
-    lang === 'nl' ? 'Onze Cursussen' : 
-    lang === 'en' ? 'Our Courses' : 
-    lang === 'ar' ? 'دوراتنا' : 
-    'Наші курси';
+interface CoursePageProps {
+  params: {
+    lang: string;
+  };
+}
 
-  const description = 
-    lang === 'nl' ? 'Ontdek onze cursussen voor nieuwkomers in Nederland' : 
-    lang === 'en' ? 'Explore our courses for newcomers in the Netherlands' : 
-    lang === 'ar' ? 'استكشف دوراتنا للقادمين الجدد في هولندا' : 
-    'Перегляньте наші курси для новоприбулих у Нідерландах';
+export default function CoursesPage({ params }: CoursePageProps) {
+  const { lang } = params;
+  
+  // Translations for page content
+  const pageTranslations = {
+    title: {
+      nl: 'Onze Cursussen',
+      en: 'Our Courses',
+      ar: 'دوراتنا',
+      uk: 'Наші курси',
+    },
+    subtitle: {
+      nl: 'Ontdek onze cursussen om je te helpen integreren in Nederland',
+      en: 'Discover our courses to help you integrate in the Netherlands',
+      ar: 'اكتشف دوراتنا لمساعدتك على الاندماج في هولندا',
+      uk: 'Відкрийте для себе наші курси, які допоможуть вам інтегруватися в Нідерландах',
+    },
+    filter: {
+      nl: 'Filter Cursussen',
+      en: 'Filter Courses',
+      ar: 'تصفية الدورات',
+      uk: 'Фільтрувати курси',
+    },
+    all: {
+      nl: 'Alle',
+      en: 'All',
+      ar: 'الكل',
+      uk: 'Всі',
+    },
+    available: {
+      nl: 'Beschikbaar voor inschrijving',
+      en: 'Available for enrollment',
+      ar: 'متاح للتسجيل',
+      uk: 'Доступно для реєстрації',
+    },
+    beginner: {
+      nl: 'Beginners',
+      en: 'Beginner',
+      ar: 'مبتدئ',
+      uk: 'Початковий',
+    },
+    intermediate: {
+      nl: 'Gemiddeld',
+      en: 'Intermediate',
+      ar: 'متوسط',
+      uk: 'Середній',
+    },
+    advanced: {
+      nl: 'Gevorderd',
+      en: 'Advanced',
+      ar: 'متقدم',
+      uk: 'Просунутий',
+    },
+  };
+
+  // Get translation based on language
+  const getTranslation = (key: keyof typeof pageTranslations) => {
+    return pageTranslations[key][lang as keyof (typeof pageTranslations)[typeof key]] || pageTranslations[key].en;
+  };
 
   return (
-    <div className="py-12 px-4 sm:px-6 max-w-7xl mx-auto">
+    <div className="container mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">{title}</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          {getTranslation('title')}
+        </h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          {description}
+          {getTranslation('subtitle')}
         </p>
       </div>
 
+      {/* Filters - in a real app, these would be functional */}
+      <div className="bg-gray-50 p-4 rounded-lg mb-8">
+        <h2 className="font-medium mb-3">{getTranslation('filter')}</h2>
+        <div className="flex flex-wrap gap-2">
+          <button className="bg-blue-600 text-white px-4 py-1 rounded-full text-sm">
+            {getTranslation('all')}
+          </button>
+          <button className="bg-white border border-gray-300 px-4 py-1 rounded-full text-sm hover:bg-gray-50">
+            {getTranslation('available')}
+          </button>
+          <button className="bg-white border border-gray-300 px-4 py-1 rounded-full text-sm hover:bg-gray-50">
+            {getTranslation('beginner')}
+          </button>
+          <button className="bg-white border border-gray-300 px-4 py-1 rounded-full text-sm hover:bg-gray-50">
+            {getTranslation('intermediate')}
+          </button>
+          <button className="bg-white border border-gray-300 px-4 py-1 rounded-full text-sm hover:bg-gray-50">
+            {getTranslation('advanced')}
+          </button>
+        </div>
+      </div>
+
+      {/* Course Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {courseData.map((course, index) => (
-          <CourseCard key={index} course={course} lang={lang} />
+        {courseData.map((course) => (
+          <CourseCard
+            key={course.id}
+            id={course.id}
+            title={course.titles[lang as keyof typeof course.titles] || course.titles.en}
+            description={course.descriptions[lang as keyof typeof course.descriptions] || course.descriptions.en}
+            image={course.imageUrl}
+            level={course.level as 'beginner' | 'intermediate' | 'advanced'}
+            duration={course.duration}
+            status={course.status as 'enrollment-open' | 'coming-soon' | 'full' | 'in-progress'}
+            lang={lang}
+          />
         ))}
       </div>
     </div>
