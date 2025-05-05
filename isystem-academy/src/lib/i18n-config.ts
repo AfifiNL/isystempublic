@@ -1,20 +1,20 @@
 export const i18n = {
-  defaultLocale: 'en',
-  locales: ['en', 'nl', 'ar', 'uk'],
+  defaultLocale: 'nl',
+  locales: ['nl', 'en', 'ar', 'uk'],
+  localeNames: {
+    nl: 'Nederlands',
+    en: 'English',
+    ar: 'العربية',
+    uk: 'Українська',
+  },
 } as const;
 
 export type Locale = (typeof i18n)['locales'][number];
 
-export const localeNames = {
-  en: 'English',
-  nl: 'Nederlands',
-  ar: 'العربية',
-  uk: 'Українська',
-};
+export function getLocaleDirection(locale: Locale): 'ltr' | 'rtl' {
+  return locale === 'ar' ? 'rtl' : 'ltr';
+}
 
-export const localeDirections = {
-  en: 'ltr',
-  nl: 'ltr',
-  ar: 'rtl',
-  uk: 'ltr',
-};
+export function isValidLocale(locale: string): locale is Locale {
+  return i18n.locales.includes(locale as Locale);
+}
