@@ -1,20 +1,17 @@
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['formdesigner.pro'],
+    domains: ['isystem.ai'],
   },
-  i18n: {
-    locales: ['en', 'nl', 'ar', 'uk'],
-    defaultLocale: 'en',
-  },
-  async redirects() {
+  // Main website is deployed at the root
+  basePath: '',
+  async rewrites() {
     return [
       {
-        source: '/',
-        destination: '/en',
-        permanent: true,
+        // Rewrite /academy/* to the academy application
+        source: '/academy/:path*',
+        destination: process.env.NEXT_PUBLIC_ACADEMY_URL + '/:path*',
       },
     ];
   },
