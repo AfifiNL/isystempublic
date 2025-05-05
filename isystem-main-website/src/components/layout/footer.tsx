@@ -1,161 +1,94 @@
 'use client';
 
-import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { format } from 'date-fns';
-import { nl } from 'date-fns/locale';
+import { Container } from '@/components/ui/container';
+import { getAcademyUrl } from '@/lib/academyHelpers';
 
 export function Footer() {
+  const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
   const currentYear = new Date().getFullYear();
   
-  // Format date based on language
-  const formattedDate = format(new Date(), 'PPP', { locale: nl });
+  // Get the Academy URL using the central helper
+  const academyUrl = getAcademyUrl(currentLanguage);
+  
+  // Navigation sections
+  const footerSections = [
+    {
+      title: t('footer.platform'),
+      links: [
+        { href: `/${currentLanguage}/platform`, label: t('nav.platform') },
+        { href: academyUrl, label: t('nav.academy') }
+      ],
+    },
+    {
+      title: t('footer.company'),
+      links: [
+        { href: `/${currentLanguage}/about`, label: t('nav.about') },
+        { href: `/${currentLanguage}/contact`, label: t('nav.contact') }
+      ],
+    },
+    {
+      title: t('footer.legal'),
+      links: [
+        { href: `/${currentLanguage}/privacy`, label: t('footer.privacy') },
+        { href: `/${currentLanguage}/terms`, label: t('footer.terms') }
+      ],
+    },
+  ];
   
   return (
-    <footer className="border-t bg-background">
-      <div className="container mx-auto py-12 px-4 md:px-6">
+    <footer className="bg-gray-50 border-t border-gray-200">
+      <Container className="py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="md:col-span-1">
-            <Link href={`/${currentLanguage}`} className="flex items-center gap-2 mb-4">
-              <Image 
-                src="/logo.svg" 
-                alt="iSystem.ai Logo" 
-                width={32} 
-                height={32} 
-                className="h-8 w-auto" 
-              />
-              <span className="text-xl font-semibold">iSystem.ai</span>
+          {/* Brand Column */}
+          <div className="col-span-1">
+            <Link href={`/${currentLanguage}`} className="flex items-center mb-4">
+              <span className="text-xl font-bold text-primary">iSystem.ai</span>
             </Link>
-            <p className="text-sm text-muted-foreground max-w-xs">
-              {currentLanguage === 'nl' 
-                ? 'AI-gestuurd integratie platform voor nieuwkomers in Nederland' 
-                : currentLanguage === 'en' 
-                ? 'AI-powered integration platform for newcomers in the Netherlands'
-                : currentLanguage === 'ar'
-                ? 'منصة تكامل مدعومة بالذكاء الاصطناعي للقادمين الجدد في هولندا'
-                : 'Платформа інтеграції на базі штучного інтелекту для новоприбулих у Нідерландах'}
+            <p className="text-sm text-gray-600 mb-4">
+              {t('footer.description')}
             </p>
+            <div className="flex space-x-4">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg className="h-5 w-5 text-gray-600 hover:text-primary" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                <svg className="h-5 w-5 text-gray-600 hover:text-primary" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.072 10.072 0 01-3.127 1.195A4.92 4.92 0 0016.953 2a4.93 4.93 0 00-4.926 4.926c0 .387.042.763.12 1.124C7.69 7.827 4.072 5.857 1.67 2.915A4.93 4.93 0 001 5.93a4.923 4.923 0 002.19 4.097 4.875 4.875 0 01-2.23-.616v.06c0 2.39 1.7 4.38 3.95 4.83a4.982 4.982 0 01-2.224.085 4.934 4.934 0 004.6 3.42 9.884 9.884 0 01-6.115 2.108A10.065 10.065 0 010 20.1c2.112 1.36 4.61 2.14 7.3 2.14 8.754 0 13.545-7.257 13.545-13.546 0-.206-.005-.412-.015-.618A9.71 9.71 0 0024 4.588z" />
+                </svg>
+              </a>
+            </div>
           </div>
           
-          <div>
-            <h3 className="text-sm font-medium mb-4">
-              {currentLanguage === 'nl' ? 'Navigatie' : 
-               currentLanguage === 'en' ? 'Navigation' : 
-               currentLanguage === 'ar' ? 'التنقل' : 'Навігація'}
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link 
-                  href={`/${currentLanguage}`} 
-                  className="text-sm text-muted-foreground hover:text-foreground"
-                >
-                  {currentLanguage === 'nl' ? 'Home' : 
-                   currentLanguage === 'en' ? 'Home' : 
-                   currentLanguage === 'ar' ? 'الرئيسية' : 'Головна'}
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href={`/${currentLanguage}/about`} 
-                  className="text-sm text-muted-foreground hover:text-foreground"
-                >
-                  {currentLanguage === 'nl' ? 'Over ons' : 
-                   currentLanguage === 'en' ? 'About us' : 
-                   currentLanguage === 'ar' ? 'من نحن' : 'Про нас'}
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href={`/${currentLanguage}/contact`} 
-                  className="text-sm text-muted-foreground hover:text-foreground"
-                >
-                  {currentLanguage === 'nl' ? 'Contact' : 
-                   currentLanguage === 'en' ? 'Contact' : 
-                   currentLanguage === 'ar' ? 'اتصل بنا' : 'Контакти'}
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-sm font-medium mb-4">
-              {currentLanguage === 'nl' ? 'Academy' : 
-               currentLanguage === 'en' ? 'Academy' : 
-               currentLanguage === 'ar' ? 'الأكاديمية' : 'Академія'}
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link 
-                  href="/academy" 
-                  className="text-sm text-muted-foreground hover:text-foreground"
-                >
-                  {currentLanguage === 'nl' ? 'Bekijk cursussen' : 
-                   currentLanguage === 'en' ? 'Browse courses' : 
-                   currentLanguage === 'ar' ? 'تصفح الدورات' : 'Перегляд курсів'}
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/academy/nl/enrollment" 
-                  className="text-sm text-muted-foreground hover:text-foreground"
-                >
-                  {currentLanguage === 'nl' ? 'Inschrijven' : 
-                   currentLanguage === 'en' ? 'Enroll now' : 
-                   currentLanguage === 'ar' ? 'سجل الآن' : 'Зареєструйтеся зараз'}
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-sm font-medium mb-4">
-              {currentLanguage === 'nl' ? 'Juridisch' : 
-               currentLanguage === 'en' ? 'Legal' : 
-               currentLanguage === 'ar' ? 'قانوني' : 'Правова інформація'}
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link 
-                  href={`/${currentLanguage}/privacy`} 
-                  className="text-sm text-muted-foreground hover:text-foreground"
-                >
-                  {currentLanguage === 'nl' ? 'Privacybeleid' : 
-                   currentLanguage === 'en' ? 'Privacy Policy' : 
-                   currentLanguage === 'ar' ? 'سياسة الخصوصية' : 'Політика конфіденційності'}
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href={`/${currentLanguage}/terms`} 
-                  className="text-sm text-muted-foreground hover:text-foreground"
-                >
-                  {currentLanguage === 'nl' ? 'Algemene voorwaarden' : 
-                   currentLanguage === 'en' ? 'Terms of Use' : 
-                   currentLanguage === 'ar' ? 'شروط الاستخدام' : 'Умови використання'}
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {/* Navigation Columns */}
+          {footerSections.map((section, index) => (
+            <div key={index} className="col-span-1">
+              <h3 className="text-sm font-semibold text-gray-900 mb-4">{section.title}</h3>
+              <ul className="space-y-3">
+                {section.links.map((link, linkIndex) => (
+                  <li key={linkIndex}>
+                    <Link href={link.href} className="text-sm text-gray-600 hover:text-primary">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
         
-        <div className="flex flex-col md:flex-row justify-between items-center mt-12 pt-8 border-t">
-          <p className="text-sm text-muted-foreground">
-            &copy; {currentYear} iSystem.ai. {currentLanguage === 'nl' ? 'Alle rechten voorbehouden.' : 
-                                              currentLanguage === 'en' ? 'All rights reserved.' : 
-                                              currentLanguage === 'ar' ? 'جميع الحقوق محفوظة.' : 
-                                              'Усі права захищені.'}
-          </p>
-          <p className="text-sm text-muted-foreground mt-4 md:mt-0">
-            {currentLanguage === 'nl' ? `Laatste update: ${formattedDate}` : 
-             currentLanguage === 'en' ? `Last updated: ${formattedDate}` : 
-             currentLanguage === 'ar' ? `آخر تحديث: ${formattedDate}` : 
-             `Останнє оновлення: ${formattedDate}`}
-          </p>
+        <div className="border-t border-gray-200 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-sm text-gray-600">&copy; {currentYear} iSystem.ai. {t('footer.rights')}</p>
+          <div className="mt-4 md:mt-0">
+            <p className="text-sm text-gray-600">{t('footer.madein')}</p>
+          </div>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }
