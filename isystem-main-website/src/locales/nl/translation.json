@@ -1,0 +1,93 @@
+{
+  "homepage": {
+    "hero": {
+      "headline": "Begin je Nederlandse reis: AI-ondersteunde integratie start hier.",
+      "subheadline": "Net geland in Nederland? iSystem.ai gebruikt slimme AI om de hobbels te verzachten - verbindt je sneller met leren, essentiële diensten en baankansen.",
+      "body": "Laten we eerlijk zijn: integreren in een nieuw land is een groot avontuur, maar het kan ook een verwarrende puzzel zijn. iSystem.ai is hier om je slimme gids te zijn! We bouwen een AI-aangedreven platform om de punten te verbinden voor nieuwkomers, gemeenten en scholen, waardoor integratie minder over papierwerk en meer over mensen gaat."
+    },
+    "problem": {
+      "headline": "Moe van het integratiedoolhof?",
+      "body": "Gefragmenteerde informatie? Eindeloze formulieren? Voel je je verloren bij het zoeken naar de juiste weg naar werk of het begrijpen van lokale regels? Je bent niet alleen. We hebben gesproken met honderden nieuwkomers en de organisaties die hen ondersteunen - het huidige systeem creëert vaak meer hindernissen dan hulp.",
+      "painPoints": {
+        "point1": "Administratieve Overbelasting = Minder Menselijke Ondersteuning",
+        "point2": "Algemene Paden Passen Niet Bij Iedereen",
+        "point3": "Voortgang Raakt Verloren in Spreadsheets",
+        "point4": "Naleving Voelt Ingewikkeld"
+      }
+    },
+    "solution": {
+      "headline": "Stel je een Slimmere Weg Vooruit Voor: Het iSystem.ai Platform.",
+      "body": "Wat als technologie het pad zou kunnen vrijmaken? Onze visie is een enkel, intelligent platform waar alles verbindt:",
+      "features": {
+        "learning": "Leren Dat Zich Aanpast aan Jou: AI stemt taal- en burgerlessen af op jouw unieke behoeften.",
+        "compliance": "Naleving Zonder Hoofdpijn: Eenvoudige dashboards maken het bijhouden van voortgang gemakkelijk voor iedereen.",
+        "jobs": "Banen Die Jou Vinden: Slimme matching verbindt je vaardigheden met echte kansen."
+      },
+      "goal": "Het Doel: Minder wrijving, meer verbinding, sneller succes voor nieuwkomers en de organisaties die hen ondersteunen."
+    },
+    "academy": {
+      "headline": "Je Eerste Stap is Klaar: Maak Kennis met de iSystem Academy!",
+      "body": "We bouwen onze grote visie stap voor stap, beginnend nu in Breda! De iSystem Academy is onze live MVP, gericht op het verbeteren van je essentiële digitale vaardigheden. Het zit vol met praktische cursussen, beschikt over onze behulpzame AI Tutor, en combineert online leren met lokale workshops. Het is je lanceerplatform voor digitaal vertrouwen in Nederland!",
+      "cardTitle": "iSystem Academy",
+      "cardIntro": "Essentiële digitale vaardigheidstraining voor nieuwkomers, met:",
+      "feature1": "AI-aangedreven gepersonaliseerd leren",
+      "feature2": "Praktische workshops in Breda",
+      "feature3": "24/7 AI Tutor ondersteuning"
+    },
+    "formats": {
+      "heading": "Beheers gewilde vaardigheden met flexibele leeropties",
+      "description": "Kies uit verschillende leerformaten ontworpen om bij jouw schema en leerstijl te passen.",
+      "options": {
+        "selfpaced": {
+          "title": "Zelfstudie Digitaal",
+          "description": "Leer in je eigen tempo met ons online platform en AI-tutor ondersteuning."
+        },
+        "workshops": {
+          "title": "Persoonlijke Workshops",
+          "description": "Doe mee aan onze praktische sessies in Breda voor directe begeleiding en gemeenschapsverbinding."
+        },
+        "blended": {
+          "title": "Gemengd Leren",
+          "description": "Combineer online leren met gerichte praktijksessies in persoon."
+        }
+      }
+    },
+    "cta": {
+      "heading": "Klaar om je Nederlandse reis te transformeren?",
+      "subheading": "Laten we samen je gepersonaliseerde leerpad bouwen.",
+      "button": "Verken de Academy"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "about": "Over Ons",
+    "academy": "Academy",
+    "contact": "Contact",
+    "login": "Inloggen",
+    "signup": "Aanmelden",
+    "language": "Taal"
+  },
+  "footer": {
+    "company": "Bedrijf",
+    "about": "Over Ons",
+    "careers": "Carrières",
+    "press": "Pers",
+    "blog": "Blog",
+    "legal": "Juridisch",
+    "terms": "Gebruiksvoorwaarden",
+    "privacy": "Privacybeleid",
+    "contact": "Neem Contact Op",
+    "email": "E-mail",
+    "phone": "Telefoon",
+    "address": "Adres",
+    "rights": "Alle rechten voorbehouden",
+    "academy": "Academy",
+    "courses": "Cursussen",
+    "workshops": "Workshops",
+    "ai_tools": "AI-tools",
+    "resources": "Bronnen",
+    "support": "Ondersteuning",
+    "faq": "FAQ",
+    "help": "Helpcentrum"
+  }
+}
