@@ -1,20 +1,14 @@
-export const i18n = {
+export const i18nConfig = {
   defaultLocale: 'en',
   locales: ['en', 'nl', 'ar', 'uk'],
-} as const;
-
-export type Locale = (typeof i18n)['locales'][number];
-
-export const localeNames = {
-  en: 'English',
-  nl: 'Nederlands',
-  ar: 'العربية',
-  uk: 'Українська',
+  domains: []
 };
 
-export const localeDirections = {
-  en: 'ltr',
-  nl: 'ltr',
-  ar: 'rtl',
-  uk: 'ltr',
-};
+export type Locale = (typeof i18nConfig)['locales'][number];
+
+/**
+ * Returns true if the provided string is a supported locale
+ */
+export function isValidLocale(locale: string): locale is Locale {
+  return i18nConfig.locales.includes(locale as Locale);
+}
