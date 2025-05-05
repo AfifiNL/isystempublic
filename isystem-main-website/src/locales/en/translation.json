@@ -1,0 +1,150 @@
+{
+  "homepage": {
+    "hero": {
+      "headline": "Unlock Your Dutch Journey: AI-Powered Integration Starts Here.",
+      "subheadline": "Landing in the Netherlands? iSystem.ai uses smart AI to smooth out the bumps – connecting you to learning, essential services, and job opportunities, faster.",
+      "body": "Let's be real: integrating into a new country is a big adventure, but it can also be a confusing puzzle. iSystem.ai is here to be your smart guide! We're building an AI-powered platform to connect the dots for newcomers, municipalities, and schools, making integration less about paperwork and more about people."
+    },
+    "problem": {
+      "headline": "Tired of the Integration Maze?",
+      "body": "Fragmented info? Endless forms? Feeling lost trying to find the right path to work or understand local rules? You're not alone. We've talked to hundreds of newcomers and the organizations supporting them – the current system often creates more hurdles than help.",
+      "painPoints": {
+        "point1": "Admin Overload = Less Human Support",
+        "point2": "Generic Paths Don't Fit Everyone",
+        "point3": "Progress Gets Lost in Spreadsheets",
+        "point4": "Compliance Feels Complicated"
+      }
+    },
+    "solution": {
+      "headline": "Imagine a Smarter Way Forward: The iSystem.ai Platform.",
+      "body": "What if technology could clear the path? Our vision is a single, intelligent platform where everything connects:",
+      "features": {
+        "learning": "Learning That Adapts to You: AI tailors language and civic lessons to your unique needs.",
+        "compliance": "Compliance Without the Headache: Simple dashboards make tracking progress easy for everyone.",
+        "jobs": "Jobs That Find You: Smart matching connects your skills to real opportunities."
+      },
+      "goal": "The Goal: Less friction, more connection, faster success for newcomers and the organizations supporting them."
+    },
+    "academy": {
+      "headline": "Your First Step is Ready: Meet the iSystem Academy!",
+      "body": "We're building our big vision step-by-step, starting right now in Breda! The iSystem Academy is our live MVP, focused on boosting your essential digital skills. It's packed with practical courses, features our helpful AI Tutor, and blends online learning with local workshops. It's your launchpad for digital confidence in the Netherlands!",
+      "cardTitle": "iSystem Academy",
+      "cardIntro": "Essential digital skills training for newcomers, featuring:",
+      "feature1": "AI-powered personalized learning",
+      "feature2": "Practical workshops in Breda",
+      "feature3": "24/7 AI Tutor assistance"
+    },
+    "formats": {
+      "heading": "Master in-demand skills with flexible learning options",
+      "description": "Choose from a variety of learning formats designed to fit your schedule and learning style.",
+      "options": {
+        "selfpaced": {
+          "title": "Self-Paced Digital",
+          "description": "Learn at your own pace with our online platform and AI tutor support."
+        },
+        "workshops": {
+          "title": "In-Person Workshops",
+          "description": "Join our hands-on sessions in Breda for direct guidance and community connection."
+        },
+        "blended": {
+          "title": "Blended Learning",
+          "description": "Combine online learning with targeted in-person practice sessions."
+        }
+      }
+    },
+    "cta": {
+      "heading": "Ready to transform your Dutch journey?",
+      "subheading": "Let's build your personalized learning path together.",
+      "button": "Explore the Academy"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "academy": "Academy",
+    "contact": "Contact",
+    "login": "Log In",
+    "signup": "Sign Up",
+    "language": "Language"
+  },
+  "footer": {
+    "company": "Company",
+    "about": "About Us",
+    "careers": "Careers",
+    "press": "Press",
+    "blog": "Blog",
+    "legal": "Legal",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "contact": "Contact Us",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "rights": "All rights reserved",
+    "academy": "Academy",
+    "courses": "Courses",
+    "workshops": "Workshops",
+    "ai_tools": "AI Tools",
+    "resources": "Resources",
+    "support": "Support",
+    "faq": "FAQ",
+    "help": "Help Center"
+  },
+  "about": {
+    "title": "About iSystem.ai",
+    "mission": {
+      "title": "Our Mission",
+      "body": "We're on a mission to transform the integration experience in the Netherlands through intelligent technology that empowers both newcomers and the organizations supporting them."
+    },
+    "story": {
+      "title": "Our Story",
+      "body": "Founded in 2023, iSystem.ai emerged from countless conversations with newcomers, municipalities, and integration professionals. We recognized that despite everyone's best efforts, the current system creates too many frustrations and missed opportunities. Our team combines expertise in AI, education, and integration policy to build solutions that make a real difference."
+    },
+    "team": {
+      "title": "Our Team",
+      "body": "We're a diverse team of technologists, educators, and integration experts committed to creating meaningful change."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We'd love to hear from you! Reach out with questions, partnership opportunities, or feedback.",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send Message",
+      "success": "Thank you! Your message has been sent.",
+      "error": "There was an error sending your message. Please try again."
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": "info@isystem.ai",
+      "phone": "+31 20 123 4567",
+      "address": "Tech Park, 1234AB Amsterdam, Netherlands",
+      "hours": "Monday-Friday: 9:00 AM - 5:00 PM"
+    }
+  },
+  "cta": {
+    "academy": "Explore the Academy",
+    "contact": "Contact Us",
+    "learn_more": "Learn More"
+  },
+  "legal": {
+    "privacy": {
+      "title": "Privacy Policy",
+      "updated": "Last Updated",
+      "contact": "If you have any questions about this Privacy Policy, please contact us at privacy@isystem.ai"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "updated": "Last Updated",
+      "contact": "If you have any questions about these Terms, please contact us at legal@isystem.ai"
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "updated": "Last Updated",
+      "contact": "If you have any questions about our Cookie Policy, please contact us at privacy@isystem.ai"
+    }
+  }
+}
